@@ -11,7 +11,6 @@ import SwiftUI
 /// A wrapper between the PartialSheetManager and the View
 struct PSManagerWrapper<Parent: View, SheetContent: View>: View {
     @EnvironmentObject var partialSheetManager: PSManager
-    
     @Binding var isPresented: Bool
     let type: PSType
     let iPhoneStyle: PSIphoneStyle
@@ -20,12 +19,14 @@ struct PSManagerWrapper<Parent: View, SheetContent: View>: View {
     let content: () -> SheetContent
     let parent: Parent
     var onDismiss: (() -> Void)?
-    
+    var outOfBoundsTapToDismiss: Bool // New property
+
     var body: some View {
         parent
+            .modifier(PartialSheet(outOfBoundsTapToDismiss: outOfBoundsTapToDismiss))
             .onChange(of: isPresented, perform: {_ in updateContent() })
     }
-    
+
     private func updateContent() {
         partialSheetManager.updatePartialSheet(
             isPresented: isPresented,

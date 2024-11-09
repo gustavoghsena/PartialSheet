@@ -12,7 +12,7 @@ public extension View {
     /**
      Add a PartialSheet to the current view. You should attach it to your Root View.
      Then you can use the **func partialSheet** from any view in the hierarchy.
-
+     
      ```
      let window = UIWindow(windowScene: windowScene)
      window.rootViewController = UIHostingController(
@@ -30,10 +30,10 @@ public extension View {
     func attachPartialSheetToRoot() -> some View {
         let sheetManager: PSManager = PSManager()
         return self
-            .modifier(PartialSheet())
+            .modifier(PartialSheet(outOfBoundsTapToDismiss: true))
             .environmentObject(sheetManager)
     }
-
+    
     /**
      Presents the **PartialSheet** attached to the root of the hierarchy.
      - parameter isPresented: Shows and hides the Partial Sheet.
@@ -49,6 +49,7 @@ public extension View {
                                      iPadMacStyle: PSIpadMacStyle = .defaultStyle(),
                                      slideAnimation: PSSlideAnimation? = nil,
                                      onDismiss: (() -> Void)? = nil,
+                                     outOfBoundsTapToDismiss: Bool = true, // New parameter
                                      @ViewBuilder content: @escaping () -> Content) -> some View {
         PSManagerWrapper(
             isPresented: isPresented,
@@ -58,7 +59,8 @@ public extension View {
             slideAnimation: slideAnimation,
             content: content,
             parent: self,
-            onDismiss: onDismiss
+            onDismiss: onDismiss,
+            outOfBoundsTapToDismiss: outOfBoundsTapToDismiss // Pass to wrapper
         )
     }
 }
