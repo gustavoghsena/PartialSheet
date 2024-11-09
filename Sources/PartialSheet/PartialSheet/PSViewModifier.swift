@@ -31,8 +31,7 @@ struct PartialSheet: ViewModifier {
     /// The rect containing the presenter
     @State private var presenterContentRect: CGRect = .zero
     
-    /// Out of bounds tap to dismiss
-    @State private var outOfBoundsTapToDismiss: Bool = false
+    var outOfBoundsTapToDismiss: Bool // New property
     
     /// The point for the top anchor
     var topAnchor: CGFloat {
@@ -186,10 +185,7 @@ extension PartialSheet {
                     }
                 }
                 .edgesIgnoringSafeArea(.vertical)
-                .onTapGesture {
-                    if outOfBoundsTapToDismiss { dismissSheet() }
-                }
-
+                .onTapGesture { dismissSheet() }
             }
             
             // The SHEET VIEW
