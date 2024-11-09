@@ -23,7 +23,7 @@ struct PSManagerWrapper<Parent: View, SheetContent: View>: View {
 
     var body: some View {
         parent
-            .modifier(PartialSheet(outOfBoundsTapToDismiss: outOfBoundsTapToDismiss))
+            .modifier(PartialSheet())
             .onChange(of: isPresented, perform: {_ in updateContent() })
     }
 

@@ -30,7 +30,7 @@ public extension View {
     func attachPartialSheetToRoot() -> some View {
         let sheetManager: PSManager = PSManager()
         return self
-            .modifier(PartialSheet(outOfBoundsTapToDismiss: true))
+            .modifier(PartialSheet())
             .environmentObject(sheetManager)
     }
     
