@@ -23,7 +23,7 @@ struct TextfieldExample: View {
                 .padding()
             Spacer()
         }
-        .partialSheet(isPresented: $isSheetPresented, outOfBoundsTapToDismiss: true, content: {
+        .partialSheet(isPresented: $isSheetPresented, content: {
             SheetTextFieldView()
         })
         .navigationBarTitle("TextField Example")
@@ -71,4 +71,3 @@ struct SheetTextFieldView: View {
         .frame(height: self.longer ? 250 : 150)
     }
 }
-

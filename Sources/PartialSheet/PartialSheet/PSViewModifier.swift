@@ -31,8 +31,6 @@ struct PartialSheet: ViewModifier {
     /// The rect containing the presenter
     @State private var presenterContentRect: CGRect = .zero
     
-    var outOfBoundsTapToDismiss: Bool // New property
-    
     /// The point for the top anchor
     var topAnchor: CGFloat {
         let topSafeArea =  safeAreaInsets.top
